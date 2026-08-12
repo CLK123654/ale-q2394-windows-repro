@@ -246,7 +246,7 @@ def main() -> None:
         write_csv(results / "lint_results.csv", lint_rows, ["chart", "status"])
         (output / "README.txt").write_text(
             "本目录供策略平台发布评审人检查旧API版本退场候选包。charts保存两个独立Chart，rendered保存四种状态的Helm静态清单，results保存对象清单、所有权处理、退场判断和发布计划。\n\n"
-            "所有权、storedVersions、对象重写和发布窗口结论均来自输入中的离线快照。Helm执行只证明Chart能够按给定取值生成候选对象，不代表控制器、conversion webhook或集群变更已经运行。后续实际变更仍需发布人员在目标窗口重新采集状态并审批。\n",
+            "所有权、storedVersions、对象重写和发布窗口结论均来自输入中的离线快照。Helm执行只证明Chart能够按给定取值生成候选对象，不代表控制器、conversion webhook或集群变更已经运行。后续实际变更需在目标窗口重新采集状态并审批。所有权或存储条件回退时保留旧版本served并继续bridge，观察conversion失败数与对象重写进度，条件恢复后另排窗口。\n",
             encoding="utf-8",
         )
     except Exception:

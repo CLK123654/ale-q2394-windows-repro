@@ -1,5 +1,5 @@
-检查项一 交付包结构
-检查项内容：两个Chart、四份渲染、五张结果表和交接说明均可读取。
+检查项：交付包结构
+两个Chart、四份渲染、五张结果表和交接说明均可读取。
 标准答案：路径与关键标准答案中的交付物答案清单一致。
 关键字段：相对路径、文件格式、Chart名称。
 容差：目录内可增加不影响业务的说明文件，必需路径不可改名。
@@ -10,8 +10,8 @@
 优先级：Gate项
 所属层级：L1任务指令遵循层
 
-检查项二 输入关联与快照口径
-检查项内容：所有权、存储版本和发布窗口按cluster完整联结，结论注明来自离线快照。
+检查项：输入关联与快照口径
+所有权、存储版本和发布窗口按cluster完整联结，结论注明来自离线快照。
 标准答案：三个CSV中的cluster集合一致且在结果表各出现一次，evidence_scope.csv标记SNAPSHOT。
 关键字段：cluster、observed_at、window_id、evidence_type。
 容差：结果行序可以变化。
@@ -22,8 +22,8 @@
 优先级：Gate项
 所属层级：L5多源关联与字段一致性层
 
-检查项三Chart边界与Helm执行
-检查项内容：Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象。
+检查项：Chart边界与Helm执行
+Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象。
 标准答案：policy-crds只渲染CustomResourceDefinition；policy-controller包含ServiceAccount、Service和Deployment，且不含合同禁止对象。
 关键字段：chart、mode、apiVersion、kind、namespace、name。
 容差：允许辅助运行时对象和不同模板拆分，不固定对象总数。
@@ -34,8 +34,8 @@
 优先级：Gate项
 所属层级：L2软件 / 工具操作层
 
-检查项四CRD版本与conversion引用
-检查项内容：additive保留旧新served版本，prune只保留v1，两个状态均只有v1为storage且带keep保护。
+检查项：CRD版本与conversion引用
+additive保留旧新served版本，prune只保留v1，两个状态均只有v1为storage且带keep保护。
 标准答案：版本集合与lifecycle_contract.json一致；conversion引用可在controller的Service中按名称、命名空间和端口闭合。
 关键字段：spec.versions、served、storage、helm.sh/resource-policy、service.name、service.namespace、service.port。
 容差：Service名称和命名空间允许由等价Chart取值决定，端口须满足合同值。
@@ -46,8 +46,8 @@
 优先级：高权重项
 所属层级：L7产物结构 / Schema / 专业对象层
 
-检查项五 控制器兼容状态
-检查项内容：bridge读取合同列出的全部版本，steady只读取v1。
+检查项：控制器兼容状态
+bridge读取合同列出的全部版本，steady只读取v1。
 标准答案：READ_VERSIONS集合分别等于bridge_read_versions和steady_read_versions。
 关键字段：Deployment容器环境变量READ_VERSIONS。
 容差：版本排列顺序可以变化，按集合比较。
@@ -58,8 +58,8 @@
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项六 所有权处理
-检查项内容：按owner_type、旧release脱离状态和批准状态给出READY或BLOCK。
+检查项：所有权处理
+按owner_type、旧release脱离状态和批准状态给出READY或BLOCK。
 标准答案：legacy_helm只有在legacy_release_detached与adoption_approved均为true时READY；manual依adoption_approved判断。
 关键字段：cluster、owner_type、action、status、reason。
 容差：原因说明可换用同义自然语言，status和action按固定枚举比较。
@@ -70,8 +70,8 @@
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项七 旧版本退场
-检查项内容：所有权READY、对象全部重写、转换失败为0且storedVersions精确等于v1时才允许退场。
+检查项：旧版本退场
+所有权READY、对象全部重写、转换失败为0且storedVersions精确等于v1时才允许退场。
 标准答案：edge-eu1为PASS，其余集群为HOLD，具体原因与固定字段答案一致。
 关键字段：cluster、ownership_status、rewrite_complete、conversion_failures、stored_versions、retirement_status。
 容差：storedVersions按集合比较，集合顺序无关。
@@ -82,8 +82,8 @@
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项八 发布计划与跨表一致性
-检查项内容：所有权BLOCK时各阶段均HOLD；所有权READY但退场HOLD时只安排additive和bridge；退场PASS时按合同顺序安排全部阶段。
+检查项：发布计划与跨表一致性
+所有权BLOCK时各阶段均HOLD；所有权READY但退场HOLD时只安排additive和bridge；退场PASS时按合同顺序安排全部阶段。
 标准答案：release_plan.csv中的阶段顺序、动作和window_id与合同及rollout_windows.csv一致。
 关键字段：cluster、phase、phase_order、decision、window_id、reason。
 容差：cluster之间的展示顺序可以变化，同一cluster的phase_order不可变化。
@@ -94,14 +94,14 @@
 优先级：Gate项
 所属层级：L9跨产物一致性与可追溯层
 
-检查项九 交接说明
-检查项内容：说明静态渲染、离线快照和后续集群变更的边界。
-标准答案：README.txt不声称控制器、准入或集群变更已运行，并点明Chart与结果表用途。
-关键字段：材料范围、结论范围、下游使用者。
+检查项：交接说明
+说明静态渲染、离线快照、实施前重采集和条件回退的边界。
+标准答案：README.txt不声称控制器、准入或集群变更已运行，并点明实施前重采集、旧版本保留、bridge观察和下一变更窗口重排。
+关键字段：材料范围、结论范围、下游使用者、回退条件、观察指标。
 容差：段落顺序与措辞可以变化。
-失败边界：把Helm渲染写成集群事实，或未说明结果表消费者。
+失败边界：把Helm渲染写成集群事实，未说明结果表消费者，或遗漏条件回退后的处理方式。
 可观察证据：output/README.txt。
-客观硬性标准：三类边界均有明确文字，且与结果表scope一致。
-阈值：缺少任一边界说明即失败。
+客观硬性标准：证据、实施和回退边界均有明确文字，且与结果表scope一致。
+阈值：缺少任一边界或回退动作即失败。
 优先级：普通项
 所属层级：L1任务指令遵循层

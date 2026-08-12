@@ -34,7 +34,7 @@ async function finish(book, label, output) {
 
 const answer = Workbook.create();
 addSheet(answer, '交付物答案清单', [
-  ['交付物名称', '固定路径或命名规则', '用途', '判定方式'],
+  ['交付物名称', '固定路径/命名规则', '用途', '判定方式'],
   ['CRD Chart', 'output/charts/policy-crds', '交给平台发布人管理CRD生命周期', '运行Helm并检查Chart结构'],
   ['控制器Chart', 'output/charts/policy-controller', '交给平台发布人独立升级控制器', '运行Helm并检查Chart结构'],
   ['additive清单', 'output/rendered/additive.yaml', '保留旧新served版本', '解析YAML对象和版本字段'],
@@ -111,6 +111,7 @@ addSheet(spec, '任务规格', [
   ['退场条件', '所有权READY、对象全部重写、转换失败为0且storedVersions精确等于v1时允许prune与steady'],
   ['阶段与窗口', '阶段顺序为ownership、additive、bridge、prune、steady；结果使用rollout_windows.csv中的批准窗口'],
   ['证据口径', '输入CSV是离线快照，Helm输出是静态候选清单，均不代表集群实时运行状态'],
+  ['实施回退', '实际变更窗口前重采集所有权与存储状态；条件回退时保留旧版本served并继续bridge，观察转换失败数和对象重写进度，恢复后另排窗口'],
   ['完成条件', '两个Chart可由Helm处理，四种状态清单与合同闭合，三张业务决策表和证据范围表可按输入复算'],
   ['可验证点', 'Chart名称、对象集合、API版本、served与storage布尔值、keep、conversion引用、状态枚举、阶段顺序和窗口主键'],
   ['不适合作为评分点的内容', 'YAML键序、文档顺序、模板拆分、注释、CSV行序、临时路径和文字排版'],

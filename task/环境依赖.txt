@@ -1,5 +1,5 @@
-支持Windows11。主软件为Helm3.18.4，使用Windows原生helm.exe执行Chart的lint与template；无需WSL、容器或Kubernetes集群。PowerShell7用于命令编排，Python3.12用于读取CSV和JSON、解析Helm输出并整理交付表。
+支持Windows11。主软件为Helm3.18.4，使用Windows原生helm.exe执行Chart的lint与template；无需WSL、容器或Kubernetes集群。辅助工具为PowerShell7和Python3.12，分别负责命令编排、读取CSV和JSON、解析Helm输出并整理交付表。
 
-正式处理只读取输入数据包和本地Chart，不访问API Server或外部服务。Helm采用Apache License2.0，随题材料为虚构且已脱敏，不含内部账号、客户信息或受限素材。运行账户需要输入目录读取权和交付目录写入权。
+正式处理只读取输入数据包和本地Chart，不访问API Server或外部服务，也不需要联网。Helm采用Apache License2.0，随题材料为虚构且已脱敏，不含内部账号、客户信息或受限素材。运行账户需要输入目录读取权限和交付目录写入权限。
 
-建议2核CPU、2GB内存和500MB可写空间，不需要GPU。服务名称可由Chart取值决定，但CRD中的conversion引用必须与控制器Chart渲染出的Service名称、命名空间和端口一致。离线快照只能支持交接判断，不能据此声称集群已完成变更。
+建议2核CPU、2GB内存和500MB可写空间，不需要GPU。本题特有风险是把离线快照误当实时集群状态，或让CRD中的conversion引用与控制器Chart渲染出的Service不一致。服务名称可由Chart取值决定，但名称、命名空间和端口必须闭合。
