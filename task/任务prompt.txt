@@ -4,4 +4,4 @@
 
 按照lifecycle_contract.json核对版本和服务引用，对四种配置执行lint与template，整理对象清单。将ownership_snapshot.csv、storage_snapshot.csv和rollout_windows.csv按cluster对齐，写出所有权处理和版本切换安排。
 
-交付两个Chart、四份渲染、所有权表、版本切换表、发布计划与说明。手续未齐或存储状态尚未收敛的集群留在兼容阶段，由值班人在维护窗前复查；其余集群按合同顺序排入维护窗。
+发布评审人会用Chart、候选清单与排期材料核对集群的兼容或切换阶段。手续未齐或存储状态未收敛的集群留在兼容阶段，由值班人在维护窗前复查；其余集群按合同顺序排入维护窗。
