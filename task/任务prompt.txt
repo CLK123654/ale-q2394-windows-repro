@@ -1,6 +1,6 @@
-策略分发平台准备停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起，卸载控制器会影响CRD。input_data中的所有权、存储版本和发布窗口是交接快照，不代表集群实时状态。
+策略分发平台将停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起，卸载控制器会影响CRD。input_data中的所有权、存储版本和发布窗口是交接快照，不代表集群实时状态。
 
-请用Helm整理policy-crds和policy-controller两个Chart。前者提供additive和prune，后者提供bridge和steady。控制器包不得生成CRD或Policy对象，CRD包保留卸载保护与conversion引用。
+请用Helm整理policy-crds和policy-controller两个Chart。前者提供additive和prune，后者提供bridge和steady。控制器包不生成CRD或Policy对象，CRD包保留卸载保护与conversion引用。
 
 依据生命周期合同核对版本和服务引用，对四种状态执行lint与template，再整理对象清单。所有权判断引用ownership_snapshot.csv，退场判断还要结合storage_snapshot.csv。
 

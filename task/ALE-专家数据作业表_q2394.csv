@@ -1,7 +1,7 @@
 ﻿题目ID,学科一级分类,学科二级分类,题目难度,任务概要,涉及的专业软件,包含的操作类型,任务prompt‼️,输入数据包（压缩包）‼️,reference（压缩包）‼️,关键标准答案‼️,关键动作,评分表（直接输入内容或使用txt文档）‼️,本项任务的环境依赖,相关专业软件的关键步骤,任务规格转化（excel或txt文档）,初标是否已完成,生产专家,完成日期
-,"Computing, Data & Mathematical Sciences 计算、数据与数学科学",基础设施工程与云运维,高,策略分发平台需要在旧版Policy API停用前拆开CRD与控制器的发布边界。交付人员使用平台组已经采集的所有权、存储版本和发布窗口快照，在Helm中整理两个Chart并渲染迁移状态，再据此编排逐集群退场计划。候选Chart、静态清单和决策表交给平台发布评审人，用于安排后续变更并避免控制器卸载误删CRD。,Helm,领域专业软件操作、文件和数据处理、脚本/命令/程序化处理、结果验证,"策略分发平台准备停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起，卸载控制器会影响CRD。input_data中的所有权、存储版本和发布窗口是交接快照，不代表集群实时状态。
+,"Computing, Data & Mathematical Sciences 计算、数据与数学科学",基础设施工程与云运维,高,策略分发平台需要在旧版Policy API停用前拆开CRD与控制器的发布边界。交付人员使用平台组已经采集的所有权、存储版本和发布窗口快照，在Helm中整理两个Chart并渲染迁移状态，再据此编排逐集群退场计划。候选Chart、静态清单和决策表交给平台发布评审人，用于安排后续变更并避免控制器卸载误删CRD。,Helm,领域专业软件操作、文件和数据处理、脚本/命令/程序化处理、结果验证,"策略分发平台将停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起，卸载控制器会影响CRD。input_data中的所有权、存储版本和发布窗口是交接快照，不代表集群实时状态。
 
-请用Helm整理policy-crds和policy-controller两个Chart。前者提供additive和prune，后者提供bridge和steady。控制器包不得生成CRD或Policy对象，CRD包保留卸载保护与conversion引用。
+请用Helm整理policy-crds和policy-controller两个Chart。前者提供additive和prune，后者提供bridge和steady。控制器包不生成CRD或Policy对象，CRD包保留卸载保护与conversion引用。
 
 依据生命周期合同核对版本和服务引用，对四种状态执行lint与template，再整理对象清单。所有权判断引用ownership_snapshot.csv，退场判断还要结合storage_snapshot.csv。
 
@@ -35,7 +35,7 @@
 优先级：Gate项
 所属层级：L5多源关联与字段一致性层
 
-检查项三 Chart边界与Helm执行
+检查项三Chart边界与Helm执行
 检查项内容：Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象。
 标准答案：policy-crds只渲染CustomResourceDefinition；policy-controller包含ServiceAccount、Service和Deployment，且不含合同禁止对象。
 关键字段：chart、mode、apiVersion、kind、namespace、name。
@@ -47,7 +47,7 @@
 优先级：Gate项
 所属层级：L2软件 / 工具操作层
 
-检查项四 CRD版本与conversion引用
+检查项四CRD版本与conversion引用
 检查项内容：additive保留旧新served版本，prune只保留v1，两个状态均只有v1为storage且带keep保护。
 标准答案：版本集合与lifecycle_contract.json一致；conversion引用可在controller的Service中按名称、命名空间和端口闭合。
 关键字段：spec.versions、served、storage、helm.sh/resource-policy、service.name、service.namespace、service.port。

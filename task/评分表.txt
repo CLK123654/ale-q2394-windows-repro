@@ -22,7 +22,7 @@
 优先级：Gate项
 所属层级：L5多源关联与字段一致性层
 
-检查项三 Chart边界与Helm执行
+检查项三Chart边界与Helm执行
 检查项内容：Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象。
 标准答案：policy-crds只渲染CustomResourceDefinition；policy-controller包含ServiceAccount、Service和Deployment，且不含合同禁止对象。
 关键字段：chart、mode、apiVersion、kind、namespace、name。
@@ -34,7 +34,7 @@
 优先级：Gate项
 所属层级：L2软件 / 工具操作层
 
-检查项四 CRD版本与conversion引用
+检查项四CRD版本与conversion引用
 检查项内容：additive保留旧新served版本，prune只保留v1，两个状态均只有v1为storage且带keep保护。
 标准答案：版本集合与lifecycle_contract.json一致；conversion引用可在controller的Service中按名称、命名空间和端口闭合。
 关键字段：spec.versions、served、storage、helm.sh/resource-policy、service.name、service.namespace、service.port。

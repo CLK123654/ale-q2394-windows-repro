@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "text_scope_count": 11,
+  "prompt_character_count": 450,
+  "prompt_paragraph_count": 4,
+  "input_file_count": 11,
+  "character_gate_counts": {
+    "quotes": 0,
+    "zh_en_space": 0,
+    "zh_num_space": 0,
+    "en_num_space": 0
+  },
+  "failures": []
+}
