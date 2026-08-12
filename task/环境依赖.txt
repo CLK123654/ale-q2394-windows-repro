@@ -1,5 +1,7 @@
-支持Windows11。主软件为Helm3.18.4，使用Windows原生helm.exe执行Chart的lint与template。辅助工具为PowerShell7和Python3.12，用于命令编排、读取CSV和JSON、解析Helm输出并整理交付表；这项工作不使用容器或Kubernetes集群。
+操作系统： Windows11。
 
-处理期间只读取交接包和本地Chart，不访问API Server或外部服务，也不需要联网。Helm采用Apache License2.0，随题材料为虚构且已脱敏，不含内部账号、客户信息或受限素材。运行账户需要输入目录读取权限和交付目录写入权限。
+主软件为Helm3.18.4，使用Windows原生helm.exe执行Chart的lint与template。PowerShell7负责调用命令，Python3.12读取CSV和JSON、解析Helm输出并整理交付表。
 
-这项工作的主要风险是离线记录已经过期，或CRD中的conversion引用与控制器Chart渲染出的Service不一致。发布负责人需要在维护窗前复查集群状态；Chart中的服务名称可以调整，但名称、命名空间和端口要保持对应。
+处理范围是交接包和本地Chart，运行账户需要输入目录读取权限和交付目录写入权限。CPU和内存需满足四组Chart渲染及结构化文件解析，GPU不参与；磁盘需要容纳输入包、候选清单和结果表。每个Helm或Python入口都应设置有限超时，超时后停止当前交付。
+
+主要风险是离线记录已经过期，或CRD中的conversion引用与控制器Chart渲染出的Service不一致。发布负责人需要在维护窗前复查集群状态；Chart中的服务名称可以调整，但名称、命名空间和端口要保持对应。

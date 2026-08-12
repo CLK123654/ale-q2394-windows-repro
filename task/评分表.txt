@@ -1,4 +1,7 @@
-检查项：交付包结构
+总分100分
+
+1. 交付包结构
+分值：8分
 两个Chart、四份渲染、六张结果表和交接说明均可读取。
 标准答案：路径与关键标准答案中的交付物答案清单一致。
 关键字段：相对路径、文件格式、Chart名称。
@@ -10,7 +13,8 @@
 优先级：Gate项
 所属层级：L1任务指令遵循层
 
-检查项：材料时点与关联
+2. 材料时点与关联
+分值：9分
 所有权、存储版本和维护窗按cluster完整联结，结果保留材料采集时间。
 标准答案：三个CSV中的cluster集合一致且在结果表各出现一次，evidence_scope.csv标记SNAPSHOT。
 关键字段：cluster、observed_at、window_id、evidence_type。
@@ -22,7 +26,8 @@
 优先级：Gate项
 所属层级：L5多源关联与字段一致性层
 
-检查项：Chart边界与Helm执行
+3. Chart边界与Helm执行
+分值：14分
 Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象。
 标准答案：policy-crds只渲染CustomResourceDefinition；policy-controller包含ServiceAccount、Service和Deployment，且不含合同禁止对象。
 关键字段：chart、mode、apiVersion、kind、namespace、name。
@@ -34,7 +39,8 @@ Helm实际处理两个独立Chart，控制器release不包含CRD或Policy对象�
 优先级：Gate项
 所属层级：L2软件 / 工具操作层
 
-检查项：CRD版本与conversion引用
+4. CRD版本与conversion引用
+分值：14分
 additive保留旧新served版本，prune只保留v1，两个状态均只有v1为storage且带keep保护。
 标准答案：版本集合与lifecycle_contract.json一致；conversion引用可在controller的Service中按名称、命名空间和端口闭合。
 关键字段：spec.versions、served、storage、helm.sh/resource-policy、service.name、service.namespace、service.port。
@@ -46,7 +52,8 @@ additive保留旧新served版本，prune只保留v1，两个状态均只有v1为
 优先级：高权重项
 所属层级：L7产物结构 / Schema / 专业对象层
 
-检查项：控制器兼容状态
+5. 控制器兼容状态
+分值：10分
 bridge读取合同列出的全部版本，steady只读取v1。
 标准答案：READ_VERSIONS集合分别等于bridge_read_versions和steady_read_versions。
 关键字段：Deployment容器环境变量READ_VERSIONS。
@@ -58,7 +65,8 @@ bridge读取合同列出的全部版本，steady只读取v1。
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项：所有权处理
+6. 所有权处理
+分值：11分
 按owner_type、旧release脱离状态和批准状态给出READY或BLOCK。
 标准答案：legacy_helm只有在legacy_release_detached与adoption_approved均为true时READY；manual依adoption_approved判断。
 关键字段：cluster、owner_type、action、status、reason。
@@ -70,7 +78,8 @@ bridge读取合同列出的全部版本，steady只读取v1。
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项：版本切换条件
+7. 版本切换条件
+分值：14分
 所有权READY、对象全部重写、转换失败为0且storedVersions精确等于v1时才允许退场。
 标准答案：edge-eu1为PASS，其余集群为HOLD，具体原因与固定字段答案一致。
 关键字段：cluster、ownership_status、rewrite_complete、conversion_failures、stored_versions、retirement_status。
@@ -82,7 +91,8 @@ bridge读取合同列出的全部版本，steady只读取v1。
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项：发布计划与跨表一致性
+8. 发布计划与跨表一致性
+分值：10分
 所有权BLOCK时各阶段均HOLD；所有权READY但退场HOLD时只安排additive和bridge；退场PASS时按合同顺序安排全部阶段。
 标准答案：release_plan.csv中的阶段顺序、动作和window_id与合同及rollout_windows.csv一致。
 关键字段：cluster、phase、phase_order、decision、window_id、reason。
@@ -94,7 +104,8 @@ bridge读取合同列出的全部版本，steady只读取v1。
 优先级：Gate项
 所属层级：L9跨产物一致性与可追溯层
 
-检查项：维护窗交接
+9. 维护窗交接
+分值：10分
 说明材料采集时间、候选Chart用途和维护窗前的岗位分工。
 标准答案：README.txt说明发布评审人使用哪些文件，值班发布人何时复查所有权与存储状态，以及状态变化后保留additive和bridge的处理方式。
 关键字段：材料时间范围、交付物用途、复查角色、复查时点、兼容阶段。
