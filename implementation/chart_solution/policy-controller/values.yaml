@@ -1,0 +1,7 @@
+controller:
+  mode: bridge
+  image: example.invalid/policy-controller:2.4.0
+service:
+  name: policy-controller
+  namespace: policy-system
+  port: 443

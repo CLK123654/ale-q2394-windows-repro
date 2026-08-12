@@ -1,0 +1,1 @@
+The task text, synthetic data, verification code, and generated examples in this repository are released under CC0-1.0. Helm is a separate Apache License2.0 project and is installed by the workflow rather than redistributed here.

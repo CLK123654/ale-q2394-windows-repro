@@ -1,0 +1,7 @@
+1. 读取lifecycle_contract.json和两个starter Chart，确认旧API版本、目标存储版本及现有release边界。
+2. 在policy-crds中设置additive与prune取值约束，渲染带keep保护和conversion引用的CRD。
+3. 在policy-controller中设置bridge与steady取值约束，渲染ServiceAccount、Service和Deployment。
+4. 分别对两个Chart执行helm lint，再用helm template生成四种状态的候选清单。
+5. 解析四份YAML，核对CRD版本、唯一storage版本、控制器读取版本及conversion Service闭合关系。
+6. 按cluster联结所有权、存储版本和窗口快照，生成所有权处理表与旧版本退场表。
+7. 依据阶段顺序把处理结论排入发布窗口，整理发布计划和静态范围说明。

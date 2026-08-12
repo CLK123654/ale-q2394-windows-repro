@@ -1,0 +1,15 @@
+{
+  "api_group": "policy.delivery.example",
+  "resource_plural": "policies",
+  "kind": "Policy",
+  "old_versions": ["v1alpha1", "v1beta1"],
+  "storage_version": "v1",
+  "crd_modes": ["additive", "prune"],
+  "controller_modes": ["bridge", "steady"],
+  "phase_order": ["ownership", "additive", "bridge", "prune", "steady"],
+  "bridge_read_versions": ["v1alpha1", "v1beta1", "v1"],
+  "steady_read_versions": ["v1"],
+  "conversion_port": 443,
+  "required_controller_kinds": ["ServiceAccount", "Service", "Deployment"],
+  "forbidden_controller_kinds": ["CustomResourceDefinition", "Policy"]
+}

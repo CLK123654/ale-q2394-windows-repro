@@ -1,0 +1,44 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: policies.policy.delivery.example
+  annotations:
+    helm.sh/resource-policy: keep
+spec:
+  group: policy.delivery.example
+  names:
+    kind: Policy
+    plural: policies
+  scope: Namespaced
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions:
+        - v1
+      clientConfig:
+        service:
+          name: {{ .Values.conversion.serviceName }}
+          namespace: {{ .Values.conversion.namespace }}
+          port: {{ .Values.conversion.port }}
+          path: /convert
+  versions:
+{{- if eq .Values.lifecycle.mode "additive" }}
+    - name: v1alpha1
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+    - name: v1beta1
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+{{- end }}
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object

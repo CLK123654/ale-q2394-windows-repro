@@ -1,0 +1,5 @@
+cluster,observed_at,owner_type,legacy_release_detached,adoption_approved
+edge-eu1,2026-07-28T02:10:00Z,legacy_helm,true,true
+edge-us1,2026-07-28T03:25:00Z,manual,false,true
+edge-ap1,2026-07-28T05:40:00Z,legacy_helm,false,true
+edge-br1,2026-07-28T07:15:00Z,manual,false,false

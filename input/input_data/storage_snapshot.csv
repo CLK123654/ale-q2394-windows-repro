@@ -1,0 +1,5 @@
+cluster,observed_at,total_objects,rewritten_to_v1,conversion_failures,stored_versions
+edge-eu1,2026-07-29T01:20:00Z,126,126,0,v1
+edge-us1,2026-07-29T02:30:00Z,84,79,0,v1beta1;v1
+edge-ap1,2026-07-29T04:05:00Z,41,41,0,v1
+edge-br1,2026-07-29T06:40:00Z,58,58,2,v1
