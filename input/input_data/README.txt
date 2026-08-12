@@ -1,3 +1,0 @@
-这批材料由平台发布组按公开字段格式编写，集群名称和业务记录均为虚构数据。ownership_snapshot.csv记录变更交接时收集的CRD所有权状态，storage_snapshot.csv记录同一批次的对象重写与storedVersions观察值，rollout_windows.csv给出各集群已批准的发布窗口。
-
-lifecycle_contract.json是本次Policy API退场的业务合同。两个starter目录保留现有Chart的主要缺陷，CRD与控制器仍由同一个release边界管理。任务只根据这些离线材料形成候选发布包，不访问Kubernetes API，也不把快照结论写成实时集群状态。

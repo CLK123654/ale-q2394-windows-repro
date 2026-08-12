@@ -1,4 +1,0 @@
-apiVersion: v2
-name: policy-controller
-version: 0.8.0
-type: application
