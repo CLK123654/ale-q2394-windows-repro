@@ -1,7 +1,7 @@
-策略分发平台将停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起。input_data中的所有权、存储版本和发布窗口是交接快照，不代表集群实时状态。
+策略分发平台准备停用Policy API的v1alpha1和v1beta1。现有release把CRD与控制器放在一起，升级安排受牵连。发布组整理了所有权、存储状态和维护窗记录。
 
-用Helm整理policy-crds和policy-controller两个Chart。前者提供additive和prune，后者提供bridge和steady。控制器不生成CRD或Policy对象，CRD包保留卸载保护与conversion引用。
+请用Helm整理policy-crds和policy-controller两个Chart。CRD Chart兼顾旧版本兼容和收口，控制器Chart含过渡与稳态配置。控制器交付只放运行对象，CRD保留卸载保护与conversion引用。
 
-依据生命周期合同核对版本和服务引用，对四种状态执行lint与template，再整理对象清单。所有权判断看ownership_snapshot.csv，退场还要结合storage_snapshot.csv。
+按照lifecycle_contract.json核对版本和服务引用，对四种配置执行lint与template，整理对象清单。将ownership_snapshot.csv、storage_snapshot.csv和rollout_windows.csv按cluster对齐，写出所有权处理和版本切换安排。
 
-交付两个Chart、四份渲染、所有权表、退场表、发布计划与说明。接管受阻时不得推进；对象未完成重写、仍有旧storedVersions或转换失败时，停在additive和bridge。实施前重采集，条件回退时保留旧served版本。
+交付两个Chart、四份渲染、所有权表、版本切换表、发布计划与说明。手续未齐或存储状态尚未收敛的集群留在兼容阶段，由值班人在维护窗前复查；其余集群按合同顺序排入维护窗。
